@@ -15,19 +15,37 @@
 	"workspaceFolder": "/opt/odoo",
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
+		// Environments - https://code.visualstudio.com/docs/languages/python?source=post_page---------------------------#_environments
 		"python.pythonPath": "/usr/local/bin/python",
+		// Code analysis settings - https://code.visualstudio.com/docs/python/settings-reference#_code-analysis-settings
+		"python.analysis.autoSearchPaths": false,
+		"python.analysis.extraPaths": [
+			"${workspaceFolder}/odoo",
+		],
+		"python.analysis.diagnosticMode": "openFilesOnly",
+		// Autocomplete and IntelliSense - https://code.visualstudio.com/docs/python/editing#_autocomplete-and-intellisense
+		//"python.autoComplete.extraPaths": [
+		//	"${workspaceFolder}/odoo"
+		//],
+		// Formatting - https://code.visualstudio.com/docs/python/editing#_formatting
 		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
 		"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
 		"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
-		"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
+		// Linting Python - https://code.visualstudio.com/docs/python/linting
+		"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
 		"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
 		"python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
-		"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
 		"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
-		"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
+		"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
+		"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
 		"python.linting.enabled": true,
-		"python.linting.pycodestyleEnabled": true,
-		"editor.formatOnSave": true,
+		"python.linting.lintOnSave": true,
+		"python.linting.pylintEnabled": false,
+		"python.linting.flake8Enabled": true,
+		// PEP8 options, Odoo Guidelines - https://www.odoo.com/documentation/14.0/developer/reference/guidelines.html#pep8-options
+		"python.linting.flake8Args": [
+			"--ignore=E501,E301,E302",
+		],
 	},
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [

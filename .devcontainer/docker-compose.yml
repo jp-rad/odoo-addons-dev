@@ -1,6 +1,7 @@
 version: '2'
 services:
   web:
+    image: "odoo-addons-dev:14.0"
     build:
       context: "."
       dockerfile: odoo/Dockerfile
