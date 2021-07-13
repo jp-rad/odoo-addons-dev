@@ -13,7 +13,7 @@ services:
     ports:
       - "8069:8069"
     volumes:
-      - ../.vscode:/opt/odoo/.vscode:cached
+      - ./odoo/.vscode:/opt/odoo/.vscode:cached
       - ..:/opt/odoo/custom_addons:cached
       - odoo-data:/opt/odoo/data
       - odoo-home:/home/vscode
