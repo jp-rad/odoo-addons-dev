@@ -23,14 +23,11 @@
 			"${workspaceFolder}/odoo",
 		],
 		"python.analysis.diagnosticMode": "openFilesOnly",
-		// Autocomplete and IntelliSense - https://code.visualstudio.com/docs/python/editing#_autocomplete-and-intellisense
-		//"python.autoComplete.extraPaths": [
-		//	"${workspaceFolder}/odoo"
-		//],
 		// Formatting - https://code.visualstudio.com/docs/python/editing#_formatting
 		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
 		"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
 		"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
+		"python.formatting.provider": "autopep8",
 		// Linting Python - https://code.visualstudio.com/docs/python/linting
 		"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
 		"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
@@ -40,18 +37,24 @@
 		"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
 		"python.linting.enabled": true,
 		"python.linting.lintOnSave": true,
-		"python.linting.pylintEnabled": false,
-		"python.linting.flake8Enabled": true,
-		// PEP8 options, Odoo Guidelines - https://www.odoo.com/documentation/14.0/developer/reference/guidelines.html#pep8-options
-		"python.linting.flake8Args": [
-			"--ignore=E501,E301,E302",
-		],
+		// Pylint Odoo plugin - https://odoo-development.readthedocs.io/en/latest/ide/emacs/pylint.html
+		"python.linting.pylintEnabled": true,
+		// odoo-development's sample configuration - https://odoo-development.readthedocs.io/en/latest/ide/visual-studio-code/configuration.html
+		// Add this auto-save option so the pylint will sow errors while editing otherwise
+		// it will only show the errors on file save
+		"files.autoSave": "afterDelay",
+		"files.autoSaveDelay": 500,
+		// The following will hide the compiled file in the editor/ add other file to hide them from editor
+		"files.exclude": {
+			"**/*.pyc": true
+		}
 	},
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-python.python",
 		"ms-python.vscode-pylance",
 		"mechatroner.rainbow-csv",
+		"jeffery9.odoo-snippets"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [9000],
