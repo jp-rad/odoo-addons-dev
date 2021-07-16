@@ -16,7 +16,7 @@ services:
       - ./odoo/.vscode:/opt/odoo/.vscode:cached
       - ..:/opt/odoo/custom_addons:cached
       - odoo-data:/opt/odoo/data
-      - odoo-home:/home/vscode
+      - user-home:/home/vscode
     env_file:
       - ./odoo/odoo.env
     depends_on: 
@@ -36,5 +36,5 @@ services:
       - postgres-data:/var/lib/postgresql/data
 volumes:
   odoo-data:
-  odoo-home:
+  user-home:
   postgres-data:

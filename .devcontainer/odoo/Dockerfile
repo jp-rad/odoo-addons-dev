@@ -64,6 +64,13 @@ RUN curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releas
 ARG SUPPORT_RTLCSS="true"
 RUN if [ "${SUPPORT_RTLCSS}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install lts/* && npm install -g rtlcss 2>&1"; fi
 
+# Install pylint odoo plugin https://github.com/OCA/pylint-odoo
+# See also: https://odoo-development.readthedocs.io/en/latest/ide/emacs/pylint.html
+RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade git+https://github.com/oca/pylint-odoo.git
+#RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade --pre pylint-odoo
+COPY odoo/.pylintrc /home/vscode
+RUN chown vscode:vscode /home/vscode/.pylintrc
+
 # Define runtime configuration
 COPY odoo/entrypoint.sh /opt/odoo
 COPY odoo/scripts/* /opt/odoo/scripts
