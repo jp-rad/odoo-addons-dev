@@ -37,7 +37,7 @@ WORKDIR /opt/odoo
 
 # Install Odoo
 USER vscode
-ARG ODOO_VERSION="14.0"
+ARG ODOO_VERSION="master"
 RUN git clone --branch=${ODOO_VERSION} --depth=1 https://github.com/odoo/odoo.git odoo
 USER root
 
