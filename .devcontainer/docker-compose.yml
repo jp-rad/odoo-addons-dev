@@ -6,10 +6,11 @@ services:
       context: "."
       dockerfile: odoo/Dockerfile
       args:
+        # Update 'ODOO_VERSION' to pick a odoo version: master, 13.0, 14.0, 15.0
         ODOO_VERSION: "14.0"
         SUPPORT_RTLCSS: "true"
         # Update 'VARIANT' to pick a Python version: 3, 3.6, 3.7, 3.8, 3.9
-        VARIANT: "3"
+        VARIANT: "3.9"
     ports:
       - "8069:8069"
     volumes:
