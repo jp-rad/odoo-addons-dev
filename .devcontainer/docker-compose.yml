@@ -23,8 +23,8 @@ services:
     depends_on: 
       - db
     tty: true
-    #command: bash
-    entrypoint: bash
+    command: bash
+    entrypoint: /opt/odoo/entrypoint.sh
   db:
     image: postgres:11
     environment:

@@ -17,6 +17,14 @@ elif [ "$1" = 'odoo-shell' ]; then
         "--db_user=$DB_USER" \
         "--db_password=$DB_PASSWORD" \
         $ODOO_EXTRA_ARGS "$@"
+elif [ "$1" = 'odoo-dev' ]; then
+    shift
+    exec ./odoo-bin \
+        "--db_host=$DB_HOST" \
+        "--db_port=$DB_PORT" \
+        "--db_user=$DB_USER" \
+        "--db_password=$DB_PASSWORD" \
+        "--database=$DB_NAME"
 else
     exec "$@"
 fi
