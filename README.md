@@ -1,15 +1,15 @@
-# odoo-addons-dev
-VSCodeとDockerを組み合わせたodooのカスタムモジュール用アドオン開発環境のテンプレート。  
-Add-ons development environment template for odoo's custom modules that combines VSCode and Docker.  
+# Odoo-addons-dev
+VSCodeとDockerを組み合わせたOdooのカスタムモジュール用アドオン開発環境のテンプレート。  
+Add-ons development environment template for Odoo's custom modules that combines VSCode and Docker.  
 
 
 # はじめに Get Started
 
-本テンプレートは、odooのカスタムモジュール用アドオン開発環境のテンプレートです。  
-This template is add-ons development environment template for odoo's custom modules.
+本テンプレートは、Odooのカスタムモジュール用アドオン開発環境のテンプレートです。  
+This template is add-ons development environment template for Odoo's custom modules.
 
-VSCodeとDockerを組み合わせているため、簡単にodooのカスタムモジュール用アドオン開発環境を構築でき、すぐに開発を始めることができます。もちろん、odoo標準のアプリケーションの動作検証を行うこともできます。  
-With the combination of VSCode and Docker, you can easily build add-ons development environment for odoo's custom modules and start developing right away. Of course, you can also verify the operation of standard odoo applications.
+VSCodeとDockerを組み合わせているため、簡単にOdooのカスタムモジュール用アドオン開発環境を構築でき、すぐに開発を始めることができます。もちろん、Odoo標準のアプリケーションの動作検証を行うこともできます。  
+With the combination of VSCode and Docker, you can easily build add-ons development environment for Odoo's custom modules and start developing right away. Of course, you can also verify the operation of standard Odoo applications.
 
 次のツールをインストールしてください。  
 Install the following tools.  
@@ -59,19 +59,19 @@ The Docker container will start and you will be able to develop remotely from VS
 
 ## custom_addons
 
-1. 「custom_addons」フォルダ内で、アドオンの開発が可能です。odooチュートリアル等を参考にしてください。  
-You can develop your own add-ons in "custom_addons" folder, see the odoo tutorials, etc.  
-https://www.odoo.com/documentation/13.0/howtos/backend.html
+1. 「custom_addons」フォルダ内で、アドオンの開発が可能です。Odooチュートリアル等を参考にしてください。  
+You can develop your own add-ons in "custom_addons" folder, see the Odoo tutorials, etc.  
+https://www.odoo.com/documentation/master/developer/howtos/backend.html
 1. 空のモジュールを新規追加するには、次のコマンドを実行します。  
 To add a new empty module, issue the following command
 ```
 /opt/odoo/odoo/odoo-bin scaffold <module name>
 ```
 
-## odoo
+## Log in to Odoo
 
-1. VSCodeの左にある「Debug and Run」アイコンをクリックし、「odoo addons」を選んだ状態で、「Start Debugging」アイコンをクリックすると、odooが起動します。  
-Click on the "Debug and Run" icon on the left of VSCode, and with "odoo addons" selected, click on the "Start Debugging" icon to start odoo.
-1. odooが起動したら、ブラウザーを開き、odooにアクセスして、ログインしてください（admin/admin）。  
-Once odoo is running, open your browser, access odoo, and log in (admin/admin).  
-http://localhost:8069/
+1. VSCodeの左にある「Debug and Run」アイコンをクリックし、「Odoo addons」を選んだ状態で、「Start Debugging」アイコンをクリックすると、Odooが起動します。  
+Click on the "Debug and Run" icon on the left of VSCode, and with "Odoo addons" selected, click on the "Start Debugging" icon to start Odoo.
+1. Odooが起動したら、ブラウザーを開き、Odooにアクセスして、ログインしてください（admin/admin）。  
+Once Odoo is running, open your browser, access Odoo, and log in (admin/admin).  
+http://localhost/
