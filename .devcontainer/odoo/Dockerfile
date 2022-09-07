@@ -71,6 +71,10 @@ RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade git+https:
 COPY odoo/.pylintrc /home/vscode
 RUN chown vscode:vscode /home/vscode/.pylintrc
 
+# Install bobtemplates.odoo.
+# See also: https://github.com/acsone/bobtemplates.odoo
+RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade bobtemplates.odoo
+
 # Define runtime configuration
 COPY odoo/entrypoint.sh /opt/odoo
 COPY odoo/scripts/* /opt/odoo/scripts
