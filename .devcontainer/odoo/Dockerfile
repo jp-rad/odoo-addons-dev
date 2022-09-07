@@ -54,13 +54,20 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 # Install dependencies
 RUN pip3 --disable-pip-version-check --no-cache-dir install -r odoo/requirements.txt
 
-# Install wkhtmltopdf - https://www.odoo.com/documentation/14.0/developer/howtos/rdtraining/02_setup.html#install-wkhtmltopdf
+# Install wkhtmltopdf
+# See also: https://www.odoo.com/documentation/master/administration/install/install.html#dependencies
+# > Important
+# > wkhtmltopdf is not installed through pip and must be installed manually in version 0.12.5 for it to support headers and footers.
+# > See our wiki for more details on the various versions. 
+# > [version 0.12.5] https://github.com/wkhtmltopdf/wkhtmltopdf/releases/tag/0.12.5
+# > [our wiki] https://github.com/odoo/odoo/wiki/Wkhtmltopdf
 RUN curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.buster_amd64.deb \
     && echo 'ea8277df4297afc507c61122f3c349af142f31e5 wkhtmltox.deb' | sha1sum -c - \
     && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
     && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
-# Right-to-left interface support - https://www.odoo.com/documentation/14.0/developer/howtos/rdtraining/02_setup.html#right-to-left-interface-support
+# Right-to-left interface support
+# See also: https://www.odoo.com/documentation/master/administration/install/install.html#dependencies
 ARG SUPPORT_RTLCSS="true"
 RUN if [ "${SUPPORT_RTLCSS}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install lts/* && npm install -g rtlcss 2>&1"; fi
 
