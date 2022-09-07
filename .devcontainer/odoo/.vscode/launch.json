@@ -6,7 +6,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "odoo addons",
+            "name": "Odoo addons",
             "type": "python",
             "request": "launch",
             "cwd": "${env:PATH_ODOO}",
