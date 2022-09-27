@@ -52,7 +52,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         python3-vobject python3-watchdog python3-xlrd python3-xlwt
 
 # Install dependencies
-RUN pip3 --disable-pip-version-check --no-cache-dir install -r odoo/requirements.txt
+# RUN pip3 --disable-pip-version-check --no-cache-dir install -r odoo/requirements.txt
+RUN sudo pip3 --disable-pip-version-check --no-cache-dir install -r odoo/requirements.txt
 
 # Install wkhtmltopdf
 # See also: https://www.odoo.com/documentation/master/administration/install/install.html#dependencies
