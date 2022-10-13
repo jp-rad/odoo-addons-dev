@@ -10,7 +10,6 @@ docker-compose -p autostart-odoo-addons-dev -f .devcontainer/docker-compose.yml 
 if "%1"=="down" (
     docker volume rm autostart-odoo-addons-dev_odoo-data
     docker volume rm autostart-odoo-addons-dev_postgres-data
-    docker volume rm autostart-odoo-addons-dev_user-home
 )
 
 pause
