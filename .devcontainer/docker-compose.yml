@@ -25,7 +25,7 @@ services:
     command: bash
     entrypoint: /opt/odoo/entrypoint.sh
   db:
-    image: postgres:11
+    image: postgres:12
     container_name: "db"
     environment:
       - POSTGRES_DB=postgres
