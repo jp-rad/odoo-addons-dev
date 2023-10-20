@@ -51,7 +51,7 @@
             "id": "addon-name",
             "type": "promptString",
             "description": "Input a new addon module name.",
-            "default": "module_name",
+            "default": "newmodule",
         }
 
     ],
