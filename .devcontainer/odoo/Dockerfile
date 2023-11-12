@@ -29,9 +29,8 @@ RUN if ! cat /etc/group | grep -e "^pip-global:" > /dev/null 2>&1; then groupadd
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
 
-# Create directories and set permissions
-RUN mkdir /etc/odoo /opt/odoo /opt/odoo/scripts \
-    && chown -R vscode:vscode /etc/odoo /opt/odoo
+# Create directory and set permission
+RUN mkdir /opt/odoo && chown -R vscode:vscode /opt/odoo
 
 WORKDIR /opt/odoo
 
@@ -72,28 +71,57 @@ RUN curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releas
 ARG SUPPORT_RTLCSS="true"
 RUN if [ "${SUPPORT_RTLCSS}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install lts/* && npm install -g rtlcss 2>&1"; fi
 
+# Install OCA Reporting Engine
+# https://github.com/OCA/reporting-engine
+USER vscode
+ARG OCA_VERSION=${ODOO_VERSION}
+RUN git clone --branch=${ODOO_VERSION} --depth=1 https://github.com/OCA/reporting-engine.git oca/reporting-engine
+USER root
+# # Install oca/reporting-engine dependencies
+# RUN pip3 --disable-pip-version-check --no-cache-dir install -r oca/reporting-engine/requirements.txt
+
+# Install py3o
+#  - the special unicode symbols for phone/fax/email
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends fonts-symbola
+#  - libreoffice
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends libreoffice
+#  - report_py3o
+RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade py3o.template py3o.formats
+# #  - report_py3o_fusion_server
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends default-jre ure libgoogle-gson-java libreoffice-java-common libreoffice-writer
+# #RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade py3o.fusion service-identity py3o.renderserver
+# RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade py3o.fusion service-identity
+# #    install py3o.renderers.juno-0.8.1
+# RUN mkdir /tmp/pip-tmp && cd /tmp/pip-tmp \
+#     && curl -o py3o.renderers.juno-0.8.1.tar.gz \
+#         https://files.pythonhosted.org/packages/17/32/5954c32dc1d0e568410c3dcb4f203f0c9d10dabf73b3e78acb90ee639e84/py3o.renderers.juno-0.8.1.tar.gz \
+#     && tar -zxvf py3o.renderers.juno-0.8.1.tar.gz -C ./ --strip-components 1 \
+#     && touch README.md \
+#     && python setup.py build && python setup.py install \
+#     && cd .. && rm -rf /tmp/pip-tmp
+# #RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade py3o.renderserver
+# RUN sudo pip3 --disable-pip-version-check --no-cache-dir install --upgrade py3o.renderserver
+
 # Install pylint odoo plugin https://github.com/OCA/pylint-odoo
 # See also: https://odoo-development.readthedocs.io/en/latest/ide/emacs/pylint.html
 #RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade git+https://github.com/oca/pylint-odoo.git
 RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade --pre pylint-odoo
-COPY odoo/.pylintrc /home/vscode
-RUN chown vscode:vscode /home/vscode/.pylintrc
 
 # Install bobtemplates.odoo.
 # See also: https://github.com/acsone/bobtemplates.odoo
 RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade bobtemplates.odoo
 
-# Define runtime configuration
-COPY odoo/entrypoint.sh /opt/odoo
-COPY odoo/scripts/* /opt/odoo/scripts
-COPY odoo/odoo.conf /etc/odoo
-RUN chown vscode:vscode /etc/odoo/odoo.conf
+# Create directories and set permissions
+RUN mkdir /opt/odoo/.vscode /opt/odoo/custom_addons /opt/odoo/data /opt/odoo/scripts /opt/odoo/templates \
+    && chown vscode:vscode /opt/odoo/.vscode /opt/odoo/custom_addons /opt/odoo/data /opt/odoo/scripts /opt/odoo/templates
+RUN mkdir /etc/odoo
+RUN mkdir /home/vscode/.vscode-server \
+    && chown vscode:vscode /home/vscode/.vscode-server
 
-USER vscode
-RUN mkdir /opt/odoo/data /opt/odoo/custom_addons \
-    /opt/odoo/.vscode /home/vscode/.vscode-server
-USER root
-
+# odoo server configuration environment files
 ENV ODOO_RC /etc/odoo/odoo.conf
 ENV PATH="/opt/odoo/scripts:${PATH}"
 
