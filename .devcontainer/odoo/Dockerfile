@@ -75,7 +75,7 @@ RUN if [ "${SUPPORT_RTLCSS}" = "true" ]; then su vscode -c "umask 0002 && . /usr
 # https://github.com/OCA/reporting-engine
 USER vscode
 ARG OCA_VERSION=${ODOO_VERSION}
-RUN git clone --branch=${ODOO_VERSION} --depth=1 https://github.com/OCA/reporting-engine.git oca/reporting-engine
+RUN git clone --branch=${OCA_VERSION} --depth=1 https://github.com/OCA/reporting-engine.git oca/reporting-engine
 USER root
 # # Install oca/reporting-engine dependencies
 # RUN pip3 --disable-pip-version-check --no-cache-dir install -r oca/reporting-engine/requirements.txt
