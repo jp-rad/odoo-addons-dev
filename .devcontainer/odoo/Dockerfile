@@ -1,4 +1,5 @@
 ## See here for image contents: https://github.com/microsoft/vscode-dev-containers/blob/v0.163.0/containers/python-3/.devcontainer/base.Dockerfile
+## Available image variants: https://github.com/microsoft/vscode-dev-containers/blob/main/containers/python-3/README.md
 ARG VARIANT="3"
 FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
 
@@ -70,40 +71,6 @@ RUN curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releas
 # See also: https://www.odoo.com/documentation/master/administration/install/install.html#dependencies
 ARG SUPPORT_RTLCSS="true"
 RUN if [ "${SUPPORT_RTLCSS}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install lts/* && npm install -g rtlcss 2>&1"; fi
-
-# Install OCA Reporting Engine
-# https://github.com/OCA/reporting-engine
-USER vscode
-ARG OCA_VERSION=${ODOO_VERSION}
-RUN git clone --branch=${OCA_VERSION} --depth=1 https://github.com/OCA/reporting-engine.git oca/reporting-engine
-USER root
-# # Install oca/reporting-engine dependencies
-# RUN pip3 --disable-pip-version-check --no-cache-dir install -r oca/reporting-engine/requirements.txt
-
-# Install py3o
-#  - the special unicode symbols for phone/fax/email
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends fonts-symbola
-#  - libreoffice
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends libreoffice
-#  - report_py3o
-RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade py3o.template py3o.formats
-# #  - report_py3o_fusion_server
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends default-jre ure libgoogle-gson-java libreoffice-java-common libreoffice-writer
-# #RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade py3o.fusion service-identity py3o.renderserver
-# RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade py3o.fusion service-identity
-# #    install py3o.renderers.juno-0.8.1
-# RUN mkdir /tmp/pip-tmp && cd /tmp/pip-tmp \
-#     && curl -o py3o.renderers.juno-0.8.1.tar.gz \
-#         https://files.pythonhosted.org/packages/17/32/5954c32dc1d0e568410c3dcb4f203f0c9d10dabf73b3e78acb90ee639e84/py3o.renderers.juno-0.8.1.tar.gz \
-#     && tar -zxvf py3o.renderers.juno-0.8.1.tar.gz -C ./ --strip-components 1 \
-#     && touch README.md \
-#     && python setup.py build && python setup.py install \
-#     && cd .. && rm -rf /tmp/pip-tmp
-# #RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade py3o.renderserver
-# RUN sudo pip3 --disable-pip-version-check --no-cache-dir install --upgrade py3o.renderserver
 
 # Install pylint odoo plugin https://github.com/OCA/pylint-odoo
 # See also: https://odoo-development.readthedocs.io/en/latest/ide/emacs/pylint.html
