@@ -7,7 +7,7 @@
     "configurations": [
         {
             "name": "Odoo addons",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "cwd": "${env:PATH_ODOO}",
             "program": "${env:PATH_ODOO}/odoo/odoo-bin",
@@ -23,7 +23,7 @@
         },
         {
             "name": "Odoo addons (with update)",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "cwd": "${env:PATH_ODOO}",
             "program": "${env:PATH_ODOO}/odoo/odoo-bin",
