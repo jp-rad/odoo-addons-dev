@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-cd odoo
+cd /opt/odoo/repos/odoo
 if [ "$1" = 'odoo' ]; then
     shift
     exec ./odoo-bin \
