@@ -6,7 +6,7 @@
         {
             "label": "mrbob - odoo:addon",
             "type": "shell",
-            "command": "cd ${env:PATH_ODOO}/custom_addons/;mrbob bobtemplates.odoo:addon",
+            "command": "cd ${env:CUSTOM_ADDONS};mrbob bobtemplates.odoo:addon",
             "problemMatcher": [],
             "presentation": {
                 "focus": true,
@@ -15,7 +15,7 @@
         {
             "label": "mrbob - odoo:model",
             "type": "shell",
-            "command": "addon=${relativeFileDirname};addon=${addon#*custom_addons/};addon=${addon%%/*};echo ${addon};cd ${env:PATH_ODOO}/custom_addons/${addon};mrbob bobtemplates.odoo:model",
+            "command": "addon=${relativeFileDirname};addon=${addon#*custom_addons/};addon=${addon%%/*};echo ${addon};cd ${env:CUSTOM_ADDONS}/${addon};mrbob bobtemplates.odoo:model",
             "problemMatcher": [],
             "presentation": {
                 "focus": true,
@@ -24,7 +24,7 @@
         {
             "label": "mrbob - odoo:test",
             "type": "shell",
-            "command": "addon=${relativeFileDirname};addon=${addon#*custom_addons/};addon=${addon%%/*};echo ${addon};cd ${env:PATH_ODOO}/custom_addons/${addon};mrbob bobtemplates.odoo:test",
+            "command": "addon=${relativeFileDirname};addon=${addon#*custom_addons/};addon=${addon%%/*};echo ${addon};cd ${env:CUSTOM_ADDONS}/${addon};mrbob bobtemplates.odoo:test",
             "problemMatcher": [],
             "presentation": {
                 "focus": true,
@@ -33,7 +33,7 @@
         {
             "label": "mrbob - odoo:wizard",
             "type": "shell",
-            "command": "addon=${relativeFileDirname};addon=${addon#*custom_addons/};addon=${addon%%/*};echo ${addon};cd ${env:PATH_ODOO}/custom_addons/${addon};mrbob bobtemplates.odoo:wizard",
+            "command": "addon=${relativeFileDirname};addon=${addon#*custom_addons/};addon=${addon%%/*};echo ${addon};cd ${env:CUSTOM_ADDONS}/${addon};mrbob bobtemplates.odoo:wizard",
             "problemMatcher": [],
             "presentation": {
                 "focus": true,
@@ -42,13 +42,7 @@
         {
             "label": "Create new custom addon",
             "type": "shell",
-            "command": "${env:PATH_ODOO}/odoo/odoo-bin scaffold ${input:addon-name} ${env:PATH_ODOO}/custom_addons/",
-            "problemMatcher": [],
-        },
-        {
-            "label": "Update ",
-            "type": "shell",
-            "command": "${env:PATH_ODOO}/odoo/odoo-bin -u all -d ${env:DB_NAME}",
+            "command": "${env:PATH_ODOO}/odoo/odoo-bin scaffold ${input:addon-name} ${env:CUSTOM_ADDONS}",
             "problemMatcher": [],
         }
     ],
