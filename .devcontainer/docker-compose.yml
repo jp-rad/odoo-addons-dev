@@ -41,12 +41,20 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
   lb:
-    image: nginx
+    image: nginx:alpine
     #container_name: "lb"
+    build:
+      context: "."
+      dockerfile: nginx/Dockerfile
+      args:
+        # Generate self-signed SSL certificate and key
+        SSL_DAYS: "36500"
+        SSL_SUBJECT: "/C=JP/ST=Tokyo/L=City/O=Example/OU=Dev/CN=localhost"
     volumes:
     - ./nginx/conf.d:/etc/nginx/conf.d:cached
     ports:
     - 80:80
+    - 443:443
 volumes:
   odoo-data:
   postgres-data:

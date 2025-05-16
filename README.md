@@ -75,3 +75,64 @@ Click on the "Debug and Run" icon on the left of VSCode, and with "Odoo addons" 
 1. Odooが起動したら、ブラウザーを開き、Odooにアクセスして、ログインしてください（admin/admin）。  
 Once Odoo is running, open your browser, access Odoo, and log in (admin/admin).  
 http://localhost/
+
+
+# ライセンス License
+
+## odoo-addons-dev のライセンス
+
+本リポジトリ「odoo-addons-dev」自体は [MITライセンス](https://opensource.org/licenses/MIT) です。  
+商用・非商用問わず自由に利用・改変・再配布が可能です。  
+MITライセンスの主な特徴は以下の通りです。
+
+- ソフトウェアの利用、複製、改変、配布、サブライセンス、販売が自由
+- 著作権表示とライセンス文の記載が必要
+- 無保証
+
+This repository "odoo-addons-dev" itself is licensed under the [MIT License](https://opensource.org/licenses/MIT).  
+You are free to use, modify, and redistribute it for commercial or non-commercial purposes.  
+Key points of the MIT License:
+
+- Free to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+- Must include copyright notice and license text
+- Provided "as is", without warranty
+
+## 開発するOdooカスタムモジュールのライセンス
+
+このテンプレートを利用して開発するOdooカスタムモジュール（`custom_addons`配下）は、  
+[LGPLv3](https://www.gnu.org/licenses/lgpl-3.0.html) または [AGPLv3](https://www.gnu.org/licenses/agpl-3.0.html) のいずれかのライセンスを選択してください。
+
+- **LGPLv3 (Lesser General Public License v3)**  
+  Odoo本体の標準的なライセンスです。  
+  商用利用やクローズドソースとの連携も可能ですが、LGPL部分の改変は公開義務があります。
+
+- **AGPLv3 (Affero General Public License v3)**  
+  OCA（Odoo Community Association）などのコミュニティモジュールで多く採用されています。  
+  サーバー経由で利用する場合もソースコード公開義務が発生します。
+
+どちらのライセンスを選択するかは、モジュールの公開方針やOdoo本体・OCAモジュールとの互換性を考慮して決定してください。
+
+When developing your own Odoo custom modules (under `custom_addons`),  
+please choose either [LGPLv3](https://www.gnu.org/licenses/lgpl-3.0.html) or [AGPLv3](https://www.gnu.org/licenses/agpl-3.0.html) as the license.
+
+- **LGPLv3**: Standard for Odoo core, allows commercial use and closed-source integration, but requires publishing modifications to LGPL parts.
+- **AGPLv3**: Common for OCA modules, requires source code disclosure even for server-side use.
+
+Choose the license according to your module's distribution policy and compatibility with Odoo/OCA modules.
+
+## OdooおよびOCAのライセンスについて
+
+Odoo本体やOCA（Odoo Community Association）の各モジュールのライセンスについては、  
+以下のOCA公式ブログ記事を参照してください。
+
+- [OCA / Odoo Meeting on Licenses](https://odoo-community.org/blog/news-updates-1/oca-odoo-meeting-on-licenses-21)
+
+Odoo本体は主にLGPLv3、OCAモジュールはAGPLv3またはLGPLv3が採用されています。  
+OdooやOCAモジュールを利用・改変・配布する際は、各プロジェクトのライセンス条件を必ずご確認ください。
+
+For details on Odoo and OCA module licenses, see the following OCA official blog post:
+
+- [OCA / Odoo Meeting on Licenses](https://odoo-community.org/blog/news-updates-1/oca-odoo-meeting-on-licenses-21)
+
+Odoo core is mainly LGPLv3, OCA modules are AGPLv3 or LGPLv3.  
+Always check the license terms of each project when using, modifying, or distributing Odoo or OCA modules.
