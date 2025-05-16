@@ -6,7 +6,8 @@ FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
 # [Optional] Allow the vscode user to pip install globally w/o sudo
 RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade pip
 ENV PIP_TARGET=/usr/local/pip-global
-ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH}
+#ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH}
+ENV PYTHONPATH=${PIP_TARGET}
 ENV PATH=${PIP_TARGET}/bin:${PATH}
 RUN if ! cat /etc/group | grep -e "^pip-global:" > /dev/null 2>&1; then groupadd -r pip-global; fi \
     && usermod -a -G pip-global vscode \
@@ -55,14 +56,16 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         python3-vobject python3-watchdog python3-xlrd python3-xlwt
 
 # Update specific package versions in the requirements file to avoid build errors
-RUN cp odoo/requirements.txt odoo/requirements.txt.org \
+ARG AVOID_BUILD_ERRORS="true"
+RUN if [ "${AVOID_BUILD_ERRORS}" = "true" ]; then \
+    cp odoo/requirements.txt odoo/requirements.txt.org \
     && sed -i -e "s/gevent==21.8.0/gevent==22.10.2/g" \
               -e "s/greenlet==1.1.2/greenlet==2.0.2/g" \
-              odoo/requirements.txt
+              odoo/requirements.txt; \
+    fi
 
 # Install dependencies
 RUN pip3 --disable-pip-version-check --no-cache-dir install -r odoo/requirements.txt
-# RUN sudo pip3 --disable-pip-version-check --no-cache-dir install -r odoo/requirements.txt
 
 # Install wkhtmltopdf
 # See also: https://www.odoo.com/documentation/master/administration/install/install.html#dependencies
@@ -85,12 +88,10 @@ RUN if [ "${SUPPORT_RTLCSS}" = "true" ]; then su vscode -c "umask 0002 && . /usr
 # See also: https://odoo-development.readthedocs.io/en/latest/ide/emacs/pylint.html
 # RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade git+https://github.com/oca/pylint-odoo.git
 RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade --pre pylint-odoo
-# RUN sudo pip3 --disable-pip-version-check --no-cache-dir install --upgrade --pre pylint-odoo
 
 # Install bobtemplates.odoo.
 # See also: https://github.com/acsone/bobtemplates.odoo
 RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade bobtemplates.odoo
-# RUN sudo pip3 --disable-pip-version-check --no-cache-dir install --upgrade bobtemplates.odoo
 
 # Create directories and set permissions
 RUN mkdir /opt/odoo/.vscode /opt/odoo/custom_addons /opt/odoo/data /opt/odoo/scripts /opt/odoo/templates \
@@ -102,7 +103,7 @@ ENV CUSTOM_ADDONS=/opt/odoo/custom_addons
 
 # odoo server configuration environment files
 ENV ODOO_RC=/etc/odoo/odoo.conf
-ENV PATH="/opt/odoo/scripts:${PATH}"
+ENV PATH=/opt/odoo/scripts:${PATH}
 
 # Expose Odoo services
 EXPOSE 8069 8071 8072
