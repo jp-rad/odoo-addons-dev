@@ -23,15 +23,15 @@
 				"python.pythonPath": "/usr/local/bin/python",
 				// Code analysis settings - https://code.visualstudio.com/docs/python/settings-reference#_code-analysis-settings
 				"python.analysis.autoSearchPaths": false,
-				"python.analysis.extraPaths": [
-					"${workspaceFolder}/odoo"
-				],
+				"python.analysis.extraPaths": [],
 				"python.analysis.diagnosticMode": "openFilesOnly",
 				// Formatting - https://code.visualstudio.com/docs/python/editing#_formatting
 				"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
 				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
 				"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
-				"python.formatting.provider": "autopep8",
+				// Odoo formatting - https://odoo-development.readthedocs.io/en/latest/ide/visual-studio-code/configuration.html
+				// "python.formatting.provider": "autopep8",
+				"python.formatting.provider": "yapf",
 				// Linting Python - https://code.visualstudio.com/docs/python/linting
 				"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
 				"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
@@ -41,8 +41,10 @@
 				"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
 				"python.linting.enabled": true,
 				"python.linting.lintOnSave": true,
-				// Pylint Odoo plugin - https://odoo-development.readthedocs.io/en/latest/ide/emacs/pylint.html
-				"python.linting.pylintEnabled": true,
+				// Pylint Odoo plugin - https://odoo-development.readthedocs.io/en/latest/ide/visual-studio-code/configuration.html
+				"python.linting.pylintArgs": ["--load-plugins", "pylint_odoo"],
+				// "python.linting.pylintEnabled": true,
+			    "python.linting.pep8Enabled": true,
 				// odoo-development's sample configuration - https://odoo-development.readthedocs.io/en/latest/ide/visual-studio-code/configuration.html
 				// Add this auto-save option so the pylint will sow errors while editing otherwise
 				// it will only show the errors on file save
