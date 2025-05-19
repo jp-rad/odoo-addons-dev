@@ -65,7 +65,7 @@ https://www.odoo.com/documentation/master/developer/howtos/backend.html
 1. 空のモジュールを新規追加するには、次のコマンドを実行します。  
 To add a new empty module, issue the following command
 ```
-/opt/odoo/odoo/odoo-bin scaffold <module name>
+/opt/odoo/repo/odoo/odoo-bin scaffold <module name>
 ```
 
 ## Log in to Odoo
