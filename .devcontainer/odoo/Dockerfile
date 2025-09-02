@@ -2,6 +2,7 @@
 # Available image variants: https://github.com/devcontainers/templates/blob/main/src/python/devcontainer-template.json
 ARG VARIANT="3"
 FROM mcr.microsoft.com/devcontainers/python:1-${VARIANT}-bookworm
+ARG PYTHONPATH=""
 
 # [Option] Install Node.js
 # ARG INSTALL_NODE="true"
@@ -32,7 +33,7 @@ RUN mkdir /opt/odoo/repos && chown -R vscode:vscode /opt/odoo/repos
 WORKDIR /opt/odoo/repos
 
 # Install Odoo
-ENV PYTHONPATH=/opt/odoo/repos/odoo${PYTHONPATH+:${PYTHONPATH}}
+ENV PYTHONPATH=/opt/odoo/repos/odoo${PYTHONPATH:+:$(PYTHONPATH)}
 USER vscode
 ARG ODOO_VERSION="master"
 RUN git clone --branch=${ODOO_VERSION} --depth=1 https://github.com/odoo/odoo.git odoo
@@ -58,7 +59,7 @@ RUN if [ "${AVOID_BUILD_ERRORS}" = "true" ]; then \
     fi
 
 # Install dependencies
-RUN pip3 --disable-pip-version-check --no-cache-dir install -r odoo/requirements.txt
+RUN pip3 --disable-pip-version-check --no-cache-dir install --upgrade -r odoo/requirements.txt
 
 # Install wkhtmltopdf, bookworm_amd64 version
 # https://www.odoo.com/documentation/master/administration/on_premise/source.html#dependencies
