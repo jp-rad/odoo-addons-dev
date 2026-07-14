@@ -4,6 +4,11 @@ ARG VARIANT="3"
 FROM mcr.microsoft.com/devcontainers/python:1-${VARIANT}-bookworm
 ARG PYTHONPATH=""
 
+# Remove broken Yarn repository from base image
+RUN rm -f /etc/apt/sources.list.d/yarn.list \
+    && rm -f /etc/apt/keyrings/yarn.gpg \
+    && apt-get update
+
 # [Option] Install Node.js
 # ARG INSTALL_NODE="true"
 # ARG NODE_VERSION="lts/*"
