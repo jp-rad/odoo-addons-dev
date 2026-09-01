@@ -39,6 +39,26 @@ git clone <GitHubリポジトリのURL>
 4. 「Remote-Containers: Reopen in Container」を選択
 5. Dockerコンテナが起動し、VSCodeからリモート開発が可能になります
 
+### ローカル環境への Root CA 証明書の登録
+
+この開発環境では、nginx が自己署名の Root CA を使って HTTPS を提供します。  
+ブラウザで安全にアクセスするため、Root CA をローカル OS に登録します。
+
+1. ブラウザで次の URL にアクセス  
+   **https://localhost/oreore**
+2. `dev-root-certificate.crt` がダウンロードされます  
+3. OS の「信頼されたルート証明機関」に `dev-root-certificate.crt` を登録します  
+
+#### Windows の場合（例）
+
+1. `dev-root-certificate.crt` を右クリック  
+2. 「証明書のインストール」を選択  
+3. 「ローカルコンピューター」を選択  
+4. ストアを「信頼されたルート証明機関」に指定  
+5. インストール完了後、ブラウザを再起動  
+
+これで **https://localhost/** に安全にアクセスできるようになります。
+
 ### custom_addons
 
 `custom_addons`フォルダで独自アドオンを開発できます。  

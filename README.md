@@ -39,6 +39,26 @@ git clone <your GitHub repository URL>
 4. Select "Remote-Containers: Reopen in Container".
 5. The Docker container will start, and you can develop remotely in VSCode.
 
+### Registering the Root CA Certificate on Your Local Machine
+
+This development environment uses nginx with a self‑signed Root CA to provide HTTPS.  
+To access the site securely, you must register the Root CA certificate on your OS.
+
+1. Open the following URL in your browser:  
+   **https://localhost/trustme**
+2. The file `dev-root-certificate.crt` will be downloaded.
+3. Register `dev-root-certificate.crt` in your OS as a **Trusted Root Certification Authority**.
+
+#### Example (Windows)
+
+1. Right‑click `dev-root-certificate.crt`.
+2. Select **Install Certificate**.
+3. Choose **Local Machine**.
+4. Select **Trusted Root Certification Authorities** as the certificate store.
+5. Restart your browser.
+
+After this, you can safely access **https://localhost/**.
+
 ### custom_addons
 
 Develop your own add-ons in the `custom_addons` folder.  
