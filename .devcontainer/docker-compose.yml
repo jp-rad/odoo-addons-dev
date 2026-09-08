@@ -53,7 +53,7 @@ services:
         # Number of days the generated certificates remain valid
         SSL_DAYS: "365"
         # # Unified subject base used for both Root CA and server certificates
-        # BASE_SUBJECT: "/C=JP/ST=Origami/L=Layer/O=ValleyMountain/OU=StackGeometry"
+        # SSL_SUBJECT_BASE: "/C=JP/ST=Origami/L=Layer/O=ValleyMountain/OU=StackGeometry"
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d:cached
     ports:

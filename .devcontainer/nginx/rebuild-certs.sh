@@ -7,35 +7,32 @@ set -e
 SSL_DAYS=${SSL_DAYS:-365}
 
 # Unified subject base
-BASE_SUBJECT=${BASE_SUBJECT:-"/C=JP/ST=Origami/L=Layer/O=ValleyMountain/OU=StackGeometry"}
+SSL_SUBJECT_BASE=${SSL_SUBJECT_BASE:-"/C=JP/ST=Origami/L=Layer/O=ValleyMountain/OU=StackGeometry"}
 
-# Root CA subject
-CA_SUBJECT="${BASE_SUBJECT}/CN=Development-Root-CA"
-
-# Server certificate subject
-SERVER_SUBJECT="${BASE_SUBJECT}/CN=localhost"
-
+# =====================================
+# Directory to store SSL certificates
+# =====================================
 SSL_DIR="/etc/nginx/ssl"
-
 echo "Rebuilding certificates in ${SSL_DIR} ..."
-
 mkdir -p "${SSL_DIR}"
 
 # =====================================
 # Generate Root CA
 # =====================================
+SSL_SUBJECT="${SSL_SUBJECT_BASE}/CN=Development-Root-CA"
 openssl req -x509 -new -nodes -days "${SSL_DAYS}" \
   -keyout "${SSL_DIR}/ca.key" \
   -out "${SSL_DIR}/ca.crt" \
-  -subj "${CA_SUBJECT}"
+  -subj "${SSL_SUBJECT}"
 
 # =====================================
 # Generate server key and CSR
 # =====================================
+SSL_SUBJECT="${SSL_SUBJECT_BASE}/CN=localhost-Developer"
 openssl req -new -nodes \
   -keyout "${SSL_DIR}/server.key" \
   -out "${SSL_DIR}/server.csr" \
-  -subj "${SERVER_SUBJECT}"
+  -subj "${SSL_SUBJECT}"
 
 # =====================================
 # SAN configuration
